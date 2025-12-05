@@ -1,0 +1,133 @@
+{
+  "endpoints": [
+    {
+      "id": "endpoint_1",
+      "method": "GET",
+      "path": "/api/receipts",
+      "description": "Retrieve all logged receipts",
+      "authentication": "none",
+      "requestParams": null,
+      "requestBody": null,
+      "responseSchema": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer"
+                },
+                "createdAt": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "amount": {
+                  "type": "number"
+                },
+                "description": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "responseExample": {
+        "success": true,
+        "data": [
+          {
+            "id": 1,
+            "createdAt": "2023-10-01T12:00:00.000Z",
+            "amount": 10.5,
+            "description": "Grocery purchase"
+          }
+        ]
+      },
+      "errorResponses": []
+    },
+    {
+      "id": "endpoint_2",
+      "method": "POST",
+      "path": "/api/receipts",
+      "description": "Log a new receipt",
+      "authentication": "none",
+      "requestParams": null,
+      "requestBody": {
+        "type": "object",
+        "required": false,
+        "properties": {
+          "amount": {
+            "type": "number",
+            "required": false,
+            "description": "Receipt amount"
+          },
+          "description": {
+            "type": "string",
+            "required": false,
+            "description": "Receipt description"
+          },
+          "category": {
+            "type": "string",
+            "required": false,
+            "description": "Receipt category"
+          }
+        },
+        "description": "All fields are optional but the body must be a valid object"
+      },
+      "responseSchema": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer"
+              },
+              "amount": {
+                "type": "number"
+              },
+              "description": {
+                "type": "string"
+              },
+              "category": {
+                "type": "string"
+              },
+              "createdAt": {
+                "type": "string",
+                "format": "date-time"
+              }
+            }
+          }
+        }
+      },
+      "responseExample": {
+        "success": true,
+        "data": {
+          "id": 1,
+          "amount": 10.5,
+          "description": "Grocery purchase",
+          "category": "Food",
+          "createdAt": "2023-10-01T12:00:00.000Z"
+        }
+      },
+      "errorResponses": [
+        {
+          "status": 400,
+          "description": "Bad Request - Invalid request body"
+        },
+        {
+          "status": 500,
+          "description": "Internal Server Error - Server-side issue"
+        }
+      ]
+    }
+  ]
+}
