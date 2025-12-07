@@ -1,0 +1,8 @@
+General Description:
+This repo is the worker of a project called TurboBackend. This Worker will handle background job processing.
+TurboBackend is a platform that allows users to generate up backend code and spin up infra
+by simply connecting our MCP to their AI IDE coding agent of choice,
+such as Kiro, Cursor or Windsurf, and prompting our platform to create a backend
+for their application. TurboBackend then instantly generates production-ready
+backend code with accompanying infrastructure on their own cloud accounts of choice. 
+Users can continually modify their backend code by simply prompting our MCP in their AI IDE.

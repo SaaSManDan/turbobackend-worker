@@ -1,0 +1,165 @@
+----------------------------------------------------------------
+Section: Postgres Database Tables
+----------------------------------------------------------------
+The tables are in the following format: column | datatype | relationships
+----------------------------------------------------------------
+
+Table: users
+user_id | varchar | PRIMARY KEY
+email | varchar |
+stripe_customer_id | varchar |
+payment_status | varchar |
+joined_at | bigint |
+
+Table: projects
+project_id | varchar | PRIMARY KEY
+user_id | varchar |
+project_name | varchar |
+created_at | bigint |
+updated_at | bigint |
+
+Table: mcp_keys
+mcp_key_id | varchar | PRIMARY KEY
+mcp_key | varchar | UNIQUE
+project_id | varchar |
+user_id | varchar |
+key_name | varchar |
+is_active | boolean |
+last_used_at | bigint |
+created_at | bigint |
+expires_at | bigint |
+
+Table: mcp_requests
+request_id | varchar | PRIMARY KEY
+mcp_key_id | varchar |
+tool_name | varchar |
+request_params | jsonb |
+response_status | varchar |
+created_at | bigint |
+
+Table: cloud_credentials
+credential_id | varchar | PRIMARY KEY
+project_id | varchar |
+cloud_provider | varchar |
+credential_name | varchar |
+credential | varchar |
+default_region | varchar |
+is_active | boolean |
+created_at | bigint |
+updated_at | bigint |
+
+Table: resource_preferences
+preference_id | varchar | PRIMARY KEY
+project_id | varchar |
+resource_type | varchar |
+preferred_cloud_provider | varchar |
+preferred_credential_id | varchar |
+preferred_region | varchar |
+resource_settings | jsonb |
+created_at | bigint |
+updated_at | bigint |
+
+Table: generated_queries
+query_id | varchar | PRIMARY KEY
+project_id | varchar |
+request_id | varchar |
+query_text | text |
+query_type | varchar |
+schema_name | varchar |
+execution_status | varchar |
+executed_at | bigint |
+error_message | text |
+environment | varchar |
+created_at | bigint |
+
+Table: github_push_history
+push_id | varchar | PRIMARY KEY
+project_id | varchar |
+request_id | varchar |
+commit_sha | varchar |
+commit_message | text |
+files_changed | jsonb |
+repo_url | varchar |
+environment | varchar |
+pushed_at | bigint |
+
+Table: project_github_repos
+repo_id | varchar | PRIMARY KEY
+project_id | varchar |
+user_id | varchar |
+repo_url | varchar |
+repo_name | varchar |
+branch | varchar |
+access_token_path | varchar |
+is_active | boolean |
+environment | varchar |
+created_at | bigint |
+updated_at | bigint |
+
+Table: project_databases
+database_id | varchar | PRIMARY KEY
+project_id | varchar |
+user_id | varchar |
+db_name | varchar |
+db_schema | varchar |
+environment | varchar |
+is_active | boolean |
+created_at | bigint |
+updated_at | bigint |
+
+Table: container_sessions
+session_id | varchar | PRIMARY KEY
+project_id | varchar |
+container_id | varchar |
+container_provider | varchar |
+status | varchar |
+container_config | jsonb |
+environment | varchar |
+started_at | bigint |
+stopped_at | bigint |
+
+Table: project_actions
+action_id | varchar | PRIMARY KEY
+project_id | varchar |
+user_id | varchar |
+request_id | varchar |
+action_type | varchar |
+action_details | varchar |
+status | varchar |
+environment | varchar |
+reference_ids | jsonb |
+created_at | bigint |
+
+Table: message_cost_tracker
+
+message_id | varchar | PRIMARY KEY
+project_id | varchar |
+job_id | varchar |
+user_id | varchar |
+prompt_content | text |
+message_type | varchar |
+model | varchar |
+input_tokens | integer |
+output_tokens | integer |
+cost_usd | decimal(10, 6) |
+time_to_completion | integer |
+started_at | bigint |
+created_at | bigint |
+
+Table: project_deployments
+deployment_id | varchar | PRIMARY KEY
+project_id | varchar |
+platform | varchar |
+app_name | varchar |
+url | varchar |
+status | varchar |
+deployed_at | bigint |
+last_updated | bigint |
+
+Table: api_blueprints
+blueprint_id | varchar | PRIMARY KEY
+project_id | varchar |
+request_id | varchar |
+blueprint_content | varchar |
+last_updated | bigint |
+created_at | bigint |
